@@ -22,7 +22,7 @@ body{
     font-size: 30px;
 }
 
-.calc-btn:hover{
+.calc-btn:hover, #calc-AC:hover{
     background-color: white;
 }
 
@@ -32,10 +32,6 @@ body{
 
 #calc-AC {
     background-color: gray;
-}
-
-#calc-AC:hover{
-    background-color: white;
 }
 
 #calc-clear{
@@ -76,6 +72,7 @@ body{
 
 #calc-equal{
     border-radius: 0 0 7px 0;
+    width: 152px;
 }
 
 .title{
