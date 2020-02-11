@@ -42,7 +42,7 @@
     </div>
     <script>
         var DisplayArray = [];
-        var Equation = [];
+        var tempArray = [];
         const display = document.getElementById('display-val');
 
         const numberBtns = document.querySelectorAll('#calc-num');
@@ -53,43 +53,48 @@
         const acBtn = document.getElementById('calc-AC');
         const backBtn = document.getElementById('calc-back');
 
-
         // Call functions on click
-        numberBtns.forEach(btn => btn.addEventListener('click', UpateDisplay));
+        numberBtns.forEach(btn => btn.addEventListener('click', BtnValueDisplay));
         calcBtn.forEach(btn => btn.addEventListener('click', Operation));
-        decimalBtn.addEventListener('click', UpateDisplay);
+        decimalBtn.addEventListener('click', BtnValueDisplay);
         acBtn.addEventListener('click', ClearDisplay);
         backBtn.addEventListener('click', BackDisplay);
         equalBtn.addEventListener('click', Calc);
 
-
-        function UpateDisplay(e){
+        function BtnValueDisplay(e){
           DisplayArray.push(e.path[0].innerText);
+          UpdateDisplay();
+        }
+
+        function UpdateDisplay(){
           display.innerText = DisplayArray.join("");
+          console.log(display.innerText);
         }
 
         function ClearDisplay(){
           DisplayArray = [];
-          Equation = [];
+          tempArray = [];
           display.innerText = 0;
         }
 
         function BackDisplay(){
           DisplayArray.pop();
-          display.innerText = DisplayArray.join("");
+          UpdateDisplay();
         }
 
         function Operation(e){
-          Equation = DisplayArray;
-          Equation.push(e.path[0].innerText);
+          tempArray = DisplayArray.join();
+          console.log(tempArray);
+          tempArray.push(e.path[0].innerText);
+          console.log(tempArray);
           DisplayArray = [];
           display.innerText = DisplayArray;
         }
 
         function Calc(){
-          let operator = Equation.pop();
+          let operator = tempArray.pop();
 
-          let beforeOp = parseInt(Equation.join("").toString());
+          let beforeOp = parseInt(tempArray.join("").toString());
           let afterOp = parseInt(DisplayArray.join("").toString());
 
           switch(operator){
@@ -106,8 +111,6 @@
               display.innerText = beforeOp / afterOp;
               break;
           }
-          Equation = [];
-          DisplayArray = [];
         }
 
     </script>
